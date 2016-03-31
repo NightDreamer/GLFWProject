@@ -18,6 +18,8 @@ public:
 
 	int getUniform(std::string);
 
+	GLuint getProgram() { return program; };
+
 private:
 	std::string loadFile(const std::string& filepath);
 
