@@ -58,6 +58,8 @@ void Window::initialise()
 	printf("OpenGL Version %d.%d loaded", GLVersion.major, GLVersion.minor);
 
 	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
 

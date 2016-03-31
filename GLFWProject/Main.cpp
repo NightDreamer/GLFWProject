@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "MainMenu.h"
 
+
 int main(int argc, char* argv[])
 {
 	Window window;
@@ -20,7 +21,7 @@ int main(int argc, char* argv[])
 		last = current;
 
 		window.pollEvents();
-		mainmenu.onTick(delta);
+		mainmenu.onTick(delta, window.getGLFWwindow());
 		mainmenu.onRender(delta);
 		window.swapBuffers();
 	}

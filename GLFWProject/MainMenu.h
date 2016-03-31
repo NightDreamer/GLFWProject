@@ -1,7 +1,7 @@
 #pragma once
 #include "Scene.h"
 #include "Shader.h"
-#include "Sprite.h"
+#include "Entity.h"
 #include <glm\mat4x4.hpp>
 #include <glm\gtc\matrix_transform.hpp>
 #include <glm\gtc\type_ptr.hpp>
@@ -15,12 +15,13 @@ public:
 	void onInit() override;
 	void onDispose() override;
 
-	void onTick(float delta) override;
+	void onTick(float delta, GLFWwindow* window) override;
 	void onRender(float delta) override;
 
 private:
 	Shader shader2D;
-	Sprite test;
+	Entity player;
+	Entity enemy;
 
 	glm::mat4 projection;
 };
