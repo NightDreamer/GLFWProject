@@ -18,8 +18,12 @@ MainMenu::~MainMenu()
 void MainMenu::onInit()
 {
 	shader2D.load("data//shader//texture_shader.vert", "data//shader//texture_shader.frag");
+
 	player.initialise("data//textures//player.png", 0.0f, 540.0f, 128.0f, 128.0f);
+	player_name.initialise("data//textures//player_name.png", 0.0f, 604.0f, 128.0f, 128.0f);
+
 	enemy.initialise("data//textures//enemy.png", 1792.0f, 540.0f, 128.0f, 128.0f);
+	enemy_name.initialise("data//textures//enemy_name.png", 1792.0f, 604.0f, 128.0f, 128.0f);
 
 	projection = glm::ortho(0.0f, 1920.0f, 0.0f, 1080.0f);
 }
@@ -28,7 +32,11 @@ void MainMenu::onInit()
 void MainMenu::onDispose()
 {
 	enemy.dispose();
+	enemy_name.dispose();
+
 	player.dispose();
+	player_name.dispose();
+
 	shader2D.dispose();
 }
 
@@ -101,11 +109,14 @@ void MainMenu::onTick(float delta, GLFWwindow* window)
 		player.collided(accelEnemy * BUMPINESS);
 	}
 
-	// TODO: check if anyone is outside the screen -> GAME OVER BITCH!
+	// TODO: check if anyone is outside the screen -> GAME OVER, BITCH!
 
 	// General logic
 	enemy.update(delta);
+	enemy_name.setPosition(enemy.getPosition() + glm::vec2(0.0f, 64.0f));
+
 	player.update(delta);
+	player_name.setPosition(player.getPosition() + glm::vec2(0.0f, 64.0f));
 }
 
 
@@ -115,7 +126,9 @@ void MainMenu::onRender(float delta)
 	glUniformMatrix4fv(glGetUniformLocation(shader2D.getProgram(), "projection"), 1, false, glm::value_ptr(projection));
 	{
 		player.draw();
+		player_name.draw();
 		enemy.draw();
+		enemy_name.draw();
 	}
 	shader2D.unbind();
 }

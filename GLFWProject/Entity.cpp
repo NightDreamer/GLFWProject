@@ -59,6 +59,18 @@ void Entity::dispose()
 	m_texture.unload();
 }
 
+
+void Entity::setPosition(float x, float y)
+{
+	pos = glm::vec2(x, y);
+}
+
+void Entity::setPosition(glm::vec2 pos)
+{
+	this->pos = pos;
+}
+
+
 void Entity::setPosition()
 {
 	old_pos = pos;

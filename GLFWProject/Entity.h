@@ -13,10 +13,13 @@ public:
 	void draw();
 	void dispose();
 
+	void setPosition(float x, float y);
+	void setPosition(glm::vec2 pos);
+	glm::vec2 getPosition() { return pos; };
+
 	void accelerate(float x, float y);
 
 	bool collide(Entity* other);
-
 	void collided(glm::vec2 impulse);
 	void update(float delta);
 

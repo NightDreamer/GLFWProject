@@ -20,8 +20,12 @@ public:
 
 private:
 	Shader shader2D;
+
 	Entity player;
+	Entity player_name;
+
 	Entity enemy;
+	Entity enemy_name;
 
 	glm::mat4 projection;
 };
