@@ -12,6 +12,8 @@ void MainMenu::Init(GLFWwindow* window)
 
 	heading.initialise("data//textures//heading.png", (static_cast<float>(width) - 512.0f) * 0.5f, (static_cast<float>(height) - 64.0f) * 0.5f, 512.0f, 512.0f);
 	start.initialise("data//textures//startmsg.png", (static_cast<float>(width) - 512.0f) * 0.5f, 64.0f, 512.0f, 64.0f);
+
+	printf("MainMenu initialised\n");
 }
 
 void MainMenu::Cleanup()
@@ -19,6 +21,8 @@ void MainMenu::Cleanup()
 	start.dispose();
 	heading.dispose();
 	shader2D.dispose();
+
+	printf("MainMenu cleaned up\n");
 }
 
 void MainMenu::Pause()

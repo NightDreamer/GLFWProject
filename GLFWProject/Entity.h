@@ -13,20 +13,21 @@ public:
 	void draw();
 	void dispose();
 
+	bool collide(Entity* other);
+	void collided(glm::vec2 impulse);
+	void update(float delta);
+
 	void setPosition(float x, float y);
 	void setPosition(glm::vec2 pos);
 	glm::vec2 getPosition() { return pos; };
 
 	void accelerate(float x, float y);
-
-	bool collide(Entity* other);
-	void collided(glm::vec2 impulse);
-	void update(float delta);
-
 	glm::vec2 getAcceleration() { return acceleration; };
 
 	void setColor(glm::vec4 c) { color = c; };
 	glm::vec4 getColor() { return color; };
+
+	glm::vec2 getSize() { return size; };
 
 private:
 	void setPosition();

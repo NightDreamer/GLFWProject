@@ -1,4 +1,6 @@
 #include "InGame.h"
+#include "GameOver.h"
+#include "MainMenu.h"
 
 #define MOVEMENT_SPEED 16.0f
 #define BUMPINESS 1.0f
@@ -17,17 +19,21 @@ void InGame::Init(GLFWwindow* window)
 	player_name.initialise("data//textures//player_name.png", 0.0f, (static_cast<float>(height) - 128.0f) * 0.5f, 128.0f, 128.0f);
 	enemy.initialise("data//textures//enemy.png", static_cast<float>(width) - 128.0f, (static_cast<float>(height) - 128.0f) * 0.5f, 128.0f, 128.0f);
 	enemy_name.initialise("data//textures//enemy_name.png", static_cast<float>(width) - 128.0f, (static_cast<float>(height) - 128.0f) * 0.5f, 128.0f, 128.0f);
+
+	printf("InGame initialised\n");
 }
 
 void InGame::Cleanup()
 {
 	enemy.dispose();
 	enemy_name.dispose();
-
 	player.dispose();
 	player_name.dispose();
 
 	shader2D.dispose();
+
+	printf("InGame cleaned up\n");
+
 }
 
 void InGame::Pause()
@@ -113,7 +119,23 @@ void InGame::Update(GameEngine* game, float delta)
 		player.collided(accelEnemy * BUMPINESS);
 	}
 
-	// TODO: check if anyone is outside the screen -> GAME OVER, BITCH!
+	int x, y;
+	glfwGetWindowSize(window, &x, &y);
+
+	float xMin = 0.0f;
+	float xMax = static_cast<float>(x);
+	float yMin = 0.0f;
+	float yMax = static_cast<float>(y);
+
+	glm::vec2 playerPos = player.getPosition() + (0.5f * player.getSize());
+	if (playerPos.x + (0.5f * player.getSize().x) < xMin || playerPos.x - (0.5f * player.getSize().x) > xMax || playerPos.y + (0.5f * player.getSize().y) < yMin || playerPos.y - (0.5f * player.getSize().y) > yMax) {
+		ChangeState(game, new GameOver(1));
+	}
+
+	glm::vec2 enemyPos = enemy.getPosition() + (0.5f * enemy.getSize());
+	if (enemyPos.x + (0.5f * enemy.getSize().x) < xMin || enemyPos.x - (0.5f * enemy.getSize().x) > xMax || enemyPos.y + (0.5f * enemy.getSize().y) < yMin || enemyPos.y - (0.5f * enemy.getSize().y) > yMax) {
+		ChangeState(game, new GameOver(0));
+	}
 
 	// General logic
 	enemy.update(delta);
