@@ -1,16 +1,13 @@
 #include "Texture.h"
 #include <iostream>
 
-
 Texture::Texture()
 {
 }
 
-
 Texture::~Texture()
 {
 }
-
 
 void Texture::loadFromFile(const char* filepath)
 {
@@ -37,13 +34,11 @@ void Texture::loadFromFile(const char* filepath)
 		printf("SOIL loading error: '%s'\n", SOIL_last_result());
 }
 
-
 void Texture::unload()
 {
 	this->unbind();
 	glDeleteTextures(1, &tex_2d);
 }
-
 
 void Texture::bind()
 {
@@ -51,11 +46,9 @@ void Texture::bind()
 	glBindTexture(GL_TEXTURE_2D, tex_2d);
 }
 
-
 void Texture::unbind()
 {
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, 0);
 }
-
 

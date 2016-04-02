@@ -4,7 +4,6 @@
 #include <sstream>
 #include <fstream>	
 
-
 void Shader::dispose()
 {
 	glDeleteProgram(program);
@@ -88,7 +87,6 @@ void Shader::load(const std::string& vertexFilepath, const std::string& fragment
 	}
 }
 
-
 void Shader::loadFromMemory(const std::string& vertexShader, const std::string& fragmentShader)
 {
 	// load & compile vertex shader
@@ -165,24 +163,20 @@ void Shader::loadFromMemory(const std::string& vertexShader, const std::string& 
 	}
 }
 
-
 int Shader::getUniform(std::string name)
 {
 	return glGetUniformLocation(program, name.c_str());
 }
-
 
 void Shader::bind()
 {
 	glUseProgram(program);
 }
 
-
 void Shader::unbind()
 {
 	glUseProgram(0);
 }
-
 
 std::string Shader::loadFile(const std::string& filepath)
 {

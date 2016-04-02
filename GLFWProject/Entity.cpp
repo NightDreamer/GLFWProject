@@ -1,11 +1,9 @@
 #include "Entity.h"
 #include <glm\glm.hpp>
 
-
 Entity::Entity()
 {
 }
-
 
 Entity::~Entity()
 {
@@ -49,7 +47,6 @@ void Entity::draw()
 	m_texture.unbind();
 }
 
-
 void Entity::dispose()
 {
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -59,7 +56,6 @@ void Entity::dispose()
 	m_texture.unload();
 }
 
-
 void Entity::setPosition(float x, float y)
 {
 	pos = glm::vec2(x, y);
@@ -67,9 +63,23 @@ void Entity::setPosition(float x, float y)
 
 void Entity::setPosition(glm::vec2 pos)
 {
+	old_pos = this->pos;
 	this->pos = pos;
-}
 
+	glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
+	float vertices[] = {
+		// Left bottom triangle
+		pos.x, pos.y + size.y, 0.0f, 0.0f,
+		pos.x, pos.y, 0.0f, 1.0f,
+		pos.x + size.x, pos.y, 1.0f, 1.0f,
+		// Right top triangle
+		pos.x + size.x, pos.y,  1.0f, 1.0f,
+		pos.x + size.x, pos.y + size.y,  1.0f, 0.0f,
+		pos.x, pos.y + size.y, 0.0f, 0.0f
+	};
+	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 24, &vertices, GL_DYNAMIC_DRAW);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+}
 
 void Entity::setPosition()
 {

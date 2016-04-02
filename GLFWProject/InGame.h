@@ -6,7 +6,7 @@
 #include <glm\gtc\matrix_transform.hpp>
 #include <glm\gtc\type_ptr.hpp>
 
-class MainMenu : public GameState
+class InGame : public GameState
 {
 public:
 	void Init(GLFWwindow* window) override;
@@ -24,7 +24,9 @@ private:
 	glm::mat4 projection;
 	GLFWwindow* window;
 
-	Entity heading;
-	Entity start;
+	Entity player;
+	Entity player_name;
+	Entity enemy;
+	Entity enemy_name;
 };
 

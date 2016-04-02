@@ -1,7 +1,7 @@
 #pragma once
-
 #include "Texture.h"
 #include <glm\vec2.hpp>
+#include <glm\vec4.hpp>
 
 class Entity
 {
@@ -25,6 +25,9 @@ public:
 
 	glm::vec2 getAcceleration() { return acceleration; };
 
+	void setColor(glm::vec4 c) { color = c; };
+	glm::vec4 getColor() { return color; };
+
 private:
 	void setPosition();
 
@@ -36,6 +39,8 @@ private:
 	glm::vec2 size;
 
 	glm::vec2 acceleration;
+
+	glm::vec4 color = glm::vec4(1.0f);
 
 	GLuint m_vao;
 	GLuint m_vbo;
